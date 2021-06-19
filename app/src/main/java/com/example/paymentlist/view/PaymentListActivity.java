@@ -28,9 +28,6 @@ public class PaymentListActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityPaymentListBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-        binding.toolbar.setNavigationIcon(R.drawable.arrow_left);
-        setSupportActionBar(binding.toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         viewModel.getPaymentListObserver().observe(this,
                 listResult -> binding.list.setAdapter(new PaymentAdapter(listResult.getNetworks().getApplicable()))

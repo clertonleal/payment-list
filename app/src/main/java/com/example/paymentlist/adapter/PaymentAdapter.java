@@ -1,13 +1,12 @@
 package com.example.paymentlist.adapter;
 
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.paymentlist.R;
+import com.example.paymentlist.databinding.CellPaymentBinding;
 import com.example.paymentlist.model.ApplicableNetwork;
 
 import org.jetbrains.annotations.NotNull;
@@ -26,8 +25,8 @@ public class PaymentAdapter extends RecyclerView.Adapter<PaymentViewHolder> {
     @NotNull
     @Override
     public PaymentViewHolder onCreateViewHolder(@NonNull @NotNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.cell_payment, parent, false);
-        return new PaymentViewHolder(view);
+        CellPaymentBinding cellPaymentBinding = CellPaymentBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false);
+        return new PaymentViewHolder(cellPaymentBinding);
     }
 
     @Override
