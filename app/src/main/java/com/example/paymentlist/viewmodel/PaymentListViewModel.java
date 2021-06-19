@@ -40,7 +40,6 @@ public class PaymentListViewModel extends ViewModel implements LifecycleObserver
             public void onResponse(@NotNull Call<ListResult> call, @NotNull Response<ListResult> response) {
                 if (response.isSuccessful()) {
                     paymentList.postValue(response.body());
-                    errorMessage.postValue("We can't access the page. =/ \nPlease verify you internet connection");
                 } else {
                     errorMessage.postValue("We have a internal error: " + response.code());
                     Timber.e("Error to request payments: %s", response.toString());
