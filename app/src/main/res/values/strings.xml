@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Payment List</string>
+    <string name="retry">Try again</string>
 </resources>
