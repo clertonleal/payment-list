@@ -1,14 +1,10 @@
 package com.example.paymentlist.viewmodel;
 
-import androidx.lifecycle.Lifecycle;
-import androidx.lifecycle.LifecycleObserver;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
-import androidx.lifecycle.OnLifecycleEvent;
-import androidx.lifecycle.ViewModel;
 
-import com.example.paymentlist.network.PaymentNetwork;
 import com.example.paymentlist.model.ListResult;
+import com.example.paymentlist.network.PaymentNetwork;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -19,7 +15,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import timber.log.Timber;
 
-public class PaymentListViewModel extends ViewModel implements LifecycleObserver {
+public class PaymentListViewModel {
 
     private final PaymentNetwork paymentNetwork;
 
@@ -32,7 +28,6 @@ public class PaymentListViewModel extends ViewModel implements LifecycleObserver
         this.paymentNetwork = paymentNetwork;
     }
 
-    @OnLifecycleEvent(Lifecycle.Event.ON_RESUME)
     public void loadPayments() {
         progress.postValue(true);
         paymentNetwork.getPayments().enqueue(new Callback<ListResult>() {
@@ -57,8 +52,7 @@ public class PaymentListViewModel extends ViewModel implements LifecycleObserver
         });
     }
 
-    @OnLifecycleEvent(Lifecycle.Event.ON_PAUSE)
-    protected void onDestroy() {
+    public void cancelNetworkCall() {
         paymentNetwork.getPayments().cancel();
     }
 

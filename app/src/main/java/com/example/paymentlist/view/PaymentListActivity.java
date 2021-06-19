@@ -9,7 +9,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.paymentlist.R;
 import com.example.paymentlist.adapter.PaymentAdapter;
 import com.example.paymentlist.databinding.ActivityPaymentListBinding;
-import com.example.paymentlist.network.PaymentNetwork;
 import com.example.paymentlist.viewmodel.PaymentListViewModel;
 
 import javax.inject.Inject;
@@ -20,7 +19,7 @@ import dagger.hilt.android.AndroidEntryPoint;
 public class PaymentListActivity extends AppCompatActivity {
 
     @Inject
-    PaymentNetwork service;
+    PaymentListViewModel viewModel;
 
     private ActivityPaymentListBinding binding;
 
@@ -31,9 +30,7 @@ public class PaymentListActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
         binding.toolbar.setNavigationIcon(R.drawable.arrow_left);
         setSupportActionBar(binding.toolbar);
-
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        PaymentListViewModel viewModel = new PaymentListViewModel(service);
 
         viewModel.getPaymentListObserver().observe(this,
                 listResult -> binding.list.setAdapter(new PaymentAdapter(listResult.getNetworks().getApplicable()))
@@ -51,7 +48,17 @@ public class PaymentListActivity extends AppCompatActivity {
         viewModel.getProgressObserver().observe(this,
                 aBoolean -> binding.progressBar.setVisibility(aBoolean ? View.VISIBLE : View.GONE)
         );
+    }
 
-        getLifecycle().addObserver(viewModel);
+    @Override
+    protected void onResume() {
+        super.onResume();
+        viewModel.loadPayments();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        viewModel.cancelNetworkCall();
     }
 }
