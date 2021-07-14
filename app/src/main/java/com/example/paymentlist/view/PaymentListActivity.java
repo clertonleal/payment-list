@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.paymentlist.R;
 import com.example.paymentlist.adapter.PaymentAdapter;
 import com.example.paymentlist.databinding.ActivityPaymentListBinding;
+import com.example.paymentlist.router.PaymentRouter;
 import com.example.paymentlist.viewmodel.PaymentListViewModel;
 
 import javax.inject.Inject;
@@ -21,6 +22,9 @@ public class PaymentListActivity extends AppCompatActivity {
     @Inject
     PaymentListViewModel viewModel;
 
+    @Inject
+    PaymentRouter paymentRouter;
+
     private ActivityPaymentListBinding binding;
 
     @Override
@@ -30,7 +34,7 @@ public class PaymentListActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         viewModel.getPaymentListObserver().observe(this,
-                listResult -> binding.list.setAdapter(new PaymentAdapter(listResult.getNetworks().getApplicable()))
+                listResult -> binding.list.setAdapter(new PaymentAdapter(listResult.getNetworks().getApplicable(), paymentRouter))
         );
 
         viewModel.getErrorMessageObserver().observe(this,

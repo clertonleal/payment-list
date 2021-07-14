@@ -1,6 +1,8 @@
 package com.example.paymentlist.injection;
 
+import com.example.paymentlist.PaymentApplication;
 import com.example.paymentlist.network.PaymentNetwork;
+import com.example.paymentlist.router.PaymentRouter;
 
 import dagger.Module;
 import dagger.Provides;
@@ -21,5 +23,10 @@ final class PaymentComponent {
                 .build();
 
         return retrofit.create(PaymentNetwork.class);
+    }
+
+    @Provides
+    static PaymentRouter providePaymentRouter() {
+        return new PaymentRouter(PaymentApplication.context);
     }
 }

@@ -8,9 +8,6 @@
 
 package com.example.paymentlist.model;
 
-
-
-
 /**
  * Option description.
  */

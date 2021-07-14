@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.paymentlist.databinding.CellPaymentBinding;
 import com.example.paymentlist.model.ApplicableNetwork;
+import com.example.paymentlist.router.PaymentRouter;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -16,9 +17,11 @@ import java.util.List;
 public class PaymentAdapter extends RecyclerView.Adapter<PaymentViewHolder> {
 
     private final List<ApplicableNetwork> networks;
+    private final PaymentRouter paymentRouter;
 
-    public PaymentAdapter(List<ApplicableNetwork> networks) {
+    public PaymentAdapter(List<ApplicableNetwork> networks, PaymentRouter paymentRouter) {
         this.networks = networks;
+        this.paymentRouter = paymentRouter;
     }
 
     @NonNull
@@ -26,7 +29,7 @@ public class PaymentAdapter extends RecyclerView.Adapter<PaymentViewHolder> {
     @Override
     public PaymentViewHolder onCreateViewHolder(@NonNull @NotNull ViewGroup parent, int viewType) {
         CellPaymentBinding cellPaymentBinding = CellPaymentBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false);
-        return new PaymentViewHolder(cellPaymentBinding);
+        return new PaymentViewHolder(cellPaymentBinding, paymentRouter);
     }
 
     @Override

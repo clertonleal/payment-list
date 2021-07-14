@@ -12,9 +12,6 @@ import java.net.URL;
 import java.util.List;
 import java.util.Map;
 
-
-
-
 /**
  * This class is designed to hold information about applicable payment network.
  */
@@ -61,5 +58,9 @@ public class ApplicableNetwork {
 
     public String getLabel() {
         return label;
+    }
+
+    public List<InputElement> getInputElements() {
+        return inputElements;
     }
 }

@@ -22,6 +22,19 @@ public class InputElement {
     private String name;
     /** type */
     private String type;
+    private String value;
     /** options */
     private List<SelectOption> options;
+
+    public String getName() {
+        return name;
+    }
+
+    public String getValue() {
+        return value;
+    }
+
+    public void setValue(String value) {
+        this.value = value;
+    }
 }
